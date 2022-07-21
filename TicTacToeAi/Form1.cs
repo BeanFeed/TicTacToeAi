@@ -19,7 +19,10 @@ namespace TicTacToeAi
             if ((grid[2] + grid[4] + grid[6]) == 6) { return true; }
             return false;
         }
-
+        private bool CheckPlayerWin()
+        {
+            if ((grid[0] + )) { return true; }
+        }
         private void slotClick(object sender, EventArgs e)
         {
             Button b = (Button)sender;
