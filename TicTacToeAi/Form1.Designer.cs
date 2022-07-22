@@ -38,6 +38,7 @@
             this.slot5 = new System.Windows.Forms.Button();
             this.slot2 = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
+            this.test = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // slot0
@@ -64,6 +65,7 @@
             this.slot1.TabIndex = 1;
             this.slot1.Text = "N";
             this.slot1.UseVisualStyleBackColor = false;
+            this.slot1.Click += new System.EventHandler(this.slotClick);
             // 
             // slot8
             // 
@@ -76,6 +78,7 @@
             this.slot8.TabIndex = 2;
             this.slot8.Text = "N";
             this.slot8.UseVisualStyleBackColor = false;
+            this.slot8.Click += new System.EventHandler(this.slotClick);
             // 
             // slot3
             // 
@@ -88,6 +91,7 @@
             this.slot3.TabIndex = 3;
             this.slot3.Text = "N";
             this.slot3.UseVisualStyleBackColor = false;
+            this.slot3.Click += new System.EventHandler(this.slotClick);
             // 
             // slot7
             // 
@@ -100,6 +104,7 @@
             this.slot7.TabIndex = 4;
             this.slot7.Text = "N";
             this.slot7.UseVisualStyleBackColor = false;
+            this.slot7.Click += new System.EventHandler(this.slotClick);
             // 
             // slot4
             // 
@@ -112,6 +117,7 @@
             this.slot4.TabIndex = 5;
             this.slot4.Text = "N";
             this.slot4.UseVisualStyleBackColor = false;
+            this.slot4.Click += new System.EventHandler(this.slotClick);
             // 
             // slot6
             // 
@@ -124,6 +130,7 @@
             this.slot6.TabIndex = 6;
             this.slot6.Text = "N";
             this.slot6.UseVisualStyleBackColor = false;
+            this.slot6.Click += new System.EventHandler(this.slotClick);
             // 
             // slot5
             // 
@@ -136,6 +143,7 @@
             this.slot5.TabIndex = 7;
             this.slot5.Text = "N";
             this.slot5.UseVisualStyleBackColor = false;
+            this.slot5.Click += new System.EventHandler(this.slotClick);
             // 
             // slot2
             // 
@@ -148,6 +156,7 @@
             this.slot2.TabIndex = 8;
             this.slot2.Text = "N";
             this.slot2.UseVisualStyleBackColor = false;
+            this.slot2.Click += new System.EventHandler(this.slotClick);
             // 
             // resetButton
             // 
@@ -158,11 +167,21 @@
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
             // 
+            // test
+            // 
+            this.test.AutoSize = true;
+            this.test.Location = new System.Drawing.Point(59, 26);
+            this.test.Name = "test";
+            this.test.Size = new System.Drawing.Size(38, 15);
+            this.test.TabIndex = 10;
+            this.test.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(299, 401);
+            this.Controls.Add(this.test);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.slot2);
             this.Controls.Add(this.slot5);
@@ -175,7 +194,9 @@
             this.Controls.Add(this.slot0);
             this.Name = "Form1";
             this.Text = "TicTacToe";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -191,5 +212,6 @@
         private Button slot5;
         private Button slot2;
         private Button resetButton;
+        private Label test;
     }
 }
