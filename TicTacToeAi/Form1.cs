@@ -119,6 +119,16 @@ namespace TicTacToeAi
         }
         private void slotClick(object sender, EventArgs e)
         {
+            bool playerWon = CheckPlayerWin();
+            bool botWon = CheckBotWin();
+            if (botWon)
+            {
+                this.test.Text = "O";
+            }
+            else if (playerWon)
+            {
+                this.test.Text = "X";
+            }
             Button b = (Button)sender;
             int slotClicked = Int32.Parse(b.Name[4].ToString());
             this.test.Text = grid[slotClicked].ToString();
@@ -130,7 +140,7 @@ namespace TicTacToeAi
                 int botPick = NextBotMove();
                 grid[botPick] = 2;
                 buttons[botPick].Text = "O";
-            }
+            }            
             
         }
 
