@@ -38,7 +38,9 @@
             this.slot5 = new System.Windows.Forms.Button();
             this.slot2 = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
-            this.test = new System.Windows.Forms.Label();
+            this.SlotVal = new System.Windows.Forms.Label();
+            this.Winner = new System.Windows.Forms.Label();
+            this.GameState = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // slot0
@@ -167,21 +169,41 @@
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
             // 
-            // test
+            // SlotVal
             // 
-            this.test.AutoSize = true;
-            this.test.Location = new System.Drawing.Point(59, 26);
-            this.test.Name = "test";
-            this.test.Size = new System.Drawing.Size(38, 15);
-            this.test.TabIndex = 10;
-            this.test.Text = "label1";
+            this.SlotVal.AutoSize = true;
+            this.SlotVal.Location = new System.Drawing.Point(59, 26);
+            this.SlotVal.Name = "SlotVal";
+            this.SlotVal.Size = new System.Drawing.Size(38, 15);
+            this.SlotVal.TabIndex = 10;
+            this.SlotVal.Text = "label1";
+            // 
+            // Winner
+            // 
+            this.Winner.AutoSize = true;
+            this.Winner.Location = new System.Drawing.Point(231, 35);
+            this.Winner.Name = "Winner";
+            this.Winner.Size = new System.Drawing.Size(38, 15);
+            this.Winner.TabIndex = 11;
+            this.Winner.Text = "label1";
+            // 
+            // GameState
+            // 
+            this.GameState.AutoSize = true;
+            this.GameState.Location = new System.Drawing.Point(138, 64);
+            this.GameState.Name = "GameState";
+            this.GameState.Size = new System.Drawing.Size(32, 15);
+            this.GameState.TabIndex = 12;
+            this.GameState.Text = "test3";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(299, 401);
-            this.Controls.Add(this.test);
+            this.Controls.Add(this.GameState);
+            this.Controls.Add(this.Winner);
+            this.Controls.Add(this.SlotVal);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.slot2);
             this.Controls.Add(this.slot5);
@@ -212,6 +234,8 @@
         private Button slot5;
         private Button slot2;
         private Button resetButton;
-        private Label test;
+        private Label SlotVal;
+        private Label Winner;
+        private Label GameState;
     }
 }

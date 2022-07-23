@@ -3,16 +3,11 @@ namespace TicTacToeAi
     public partial class Form1 : Form
     {
         List<Button> buttons;
-        private int[] grid = new int[] {0,0,0,0,0,0,0,0,0};   
-        public Form1()
-        {
-            InitializeComponent();
-        }
         private void Form1_Load(object sender, EventArgs e)
         {
             buttons = this.Controls.OfType<Button>().ToList();
             List<Button> inputs = new List<Button>();
-            foreach(Button button in buttons)
+            foreach (Button button in buttons)
             {
                 if (button.Name.Contains("slot"))
                 {
@@ -21,49 +16,27 @@ namespace TicTacToeAi
             }
             buttons = inputs;
         }
-        private bool CheckBotWin()
+        private Button GetButtonByName(string name)
         {
-            if ((grid[0] + grid[1] + grid[2]) == 6) { return true; }
-            if ((grid[3] + grid[4] + grid[5]) == 6) { return true; }
-            if ((grid[6] + grid[7] + grid[8]) == 6) { return true; }
-            if ((grid[0] + grid[3] + grid[6]) == 6) { return true; }
-            if ((grid[1] + grid[4] + grid[7]) == 6) { return true; }
-            if ((grid[2] + grid[5] + grid[8]) == 6) { return true; }
-            if ((grid[0] + grid[4] + grid[8]) == 6) { return true; }
-            if ((grid[2] + grid[4] + grid[6]) == 6) { return true; }
-            return false;
-        }
-        private bool CheckPlayerWin()
-        {
-            if ((grid[0] + grid[1] + grid[2]) == 21) { return true; }
-            if ((grid[3] + grid[4] + grid[5]) == 21) { return true; }
-            if ((grid[6] + grid[7] + grid[8]) == 21) { return true; }
-            if ((grid[0] + grid[3] + grid[6]) == 21) { return true; }
-            if ((grid[1] + grid[4] + grid[7]) == 21) { return true; }
-            if ((grid[2] + grid[5] + grid[8]) == 21) { return true; }
-            if ((grid[0] + grid[4] + grid[8]) == 21) { return true; }
-            if ((grid[2] + grid[4] + grid[6]) == 21) { return true; }
-            return false;
-        }
-        private bool IsEven(int num)
-        {
-            if (num%2 == 0)
+            foreach(Button button in buttons)
             {
-                return true;
+                if(button.Name == name) return button;
             }
-            return false;
+            return null;
         }
         private int CalcOdds(int[] board)
         {
+            
             int spaces = GetRemainingSpaces();
             int losses = 0;
-            if (spaces == 0 && CheckPlayerWin())
+            if (spaces == 0 && GetWinner() == "X")
             {
                 return 1;
             }
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 9; i++)
             {
-                int[] newBoard = board;
+                int[] newBoard = new int[9];
+                Array.Copy(board, newBoard, 9);
                 if (newBoard[i] == 0)
                 {
                     if (IsEven(spaces))
@@ -79,14 +52,15 @@ namespace TicTacToeAi
             }
             return losses;
         }
-        private int NextBotMove()
+        private void BotMove(int[] board)
         {
             List<int[]> results = new List<int[]>();
-            for(int i = 0; i < 8; i++)
+            int[] newGrid = new int[9];
+            Array.Copy(board,newGrid, 9);
+            for (int i = 0; i < 9; i++)
             {
                 if (grid[i] == 0)
                 {
-                    int[] newGrid = grid;
                     newGrid[i] = 2;
                     int losses = CalcOdds(newGrid);
                     results.Add(new int[] { i, losses });
@@ -101,10 +75,10 @@ namespace TicTacToeAi
                     lowestSlot = result[0];
                 }
             }
-            return lowestSlot;
+            Button buttonToPlay = GetButtonByName("slot" + lowestSlot);
+            PlayPiece(lowestSlot, buttonToPlay);
 
         }
-
         private int GetRemainingSpaces()
         {
             int spaces = 0;
@@ -117,33 +91,79 @@ namespace TicTacToeAi
             }
             return spaces;
         }
+        private bool IsEven(int num)
+        {
+            if (num%2 == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        int[] grid = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        bool isXTurn = true;
+        bool gameOver = false;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private string GetWinner()
+        {
+            if ((grid[0] + grid[1] + grid[2]) == 6) { return "O"; }
+            if ((grid[3] + grid[4] + grid[5]) == 6) { return "O"; }
+            if ((grid[6] + grid[7] + grid[8]) == 6) { return "O"; }
+            if ((grid[0] + grid[3] + grid[6]) == 6) { return "O"; }
+            if ((grid[1] + grid[4] + grid[7]) == 6) { return "O"; }
+            if ((grid[2] + grid[5] + grid[8]) == 6) { return "O"; }
+            if ((grid[0] + grid[4] + grid[8]) == 6) { return "O"; }
+            if ((grid[2] + grid[4] + grid[6]) == 6) { return "O"; }
+            if ((grid[0] + grid[1] + grid[2]) == 21) { return "X"; }
+            if ((grid[3] + grid[4] + grid[5]) == 21) { return "X"; }
+            if ((grid[6] + grid[7] + grid[8]) == 21) { return "X"; }
+            if ((grid[0] + grid[3] + grid[6]) == 21) { return "X"; }
+            if ((grid[1] + grid[4] + grid[7]) == 21) { return "X"; }
+            if ((grid[2] + grid[5] + grid[8]) == 21) { return "X"; }
+            if ((grid[0] + grid[4] + grid[8]) == 21) { return "X"; }
+            if ((grid[2] + grid[4] + grid[6]) == 21) { return "X"; }
+            return "N";
+        }
+        private void PlayPiece(int slot, Button b)
+        {
+            if (isXTurn)
+            {
+                grid[slot] = 7;
+                b.Text = "X";
+            }
+            else
+            {
+                grid[slot] = 2;
+                b.Text = "O";
+            }
+            isXTurn = !isXTurn;
+            string winner = GetWinner();
+            if (winner != "N")
+            {
+                this.Winner.Text = winner;
+                gameOver = true;
+                this.GameState.Text = "Over";
+            }
+        }
         private void slotClick(object sender, EventArgs e)
         {
-            bool playerWon = CheckPlayerWin();
-            bool botWon = CheckBotWin();
-            if (botWon)
+            Button button = (Button)sender;
+            int slotClicked = int.Parse(button.Name[4].ToString());
+            this.SlotVal.Text = grid[slotClicked].ToString();
+            if (!gameOver)
             {
-                this.test.Text = "O";
-            }
-            else if (playerWon)
-            {
-                this.test.Text = "X";
-            }
-            Button b = (Button)sender;
-            int slotClicked = Int32.Parse(b.Name[4].ToString());
-            this.test.Text = grid[slotClicked].ToString();
-            
-            if (grid[slotClicked] == 0)
-            {
-                grid[slotClicked] = 7;
-                b.Text = "X";
-                int botPick = NextBotMove();
-                grid[botPick] = 2;
-                buttons[botPick].Text = "O";
-            }            
-            
-        }
 
-        
+                if (grid[slotClicked] == 0)
+                {
+                    PlayPiece(slotClicked, button);
+                    if (GetWinner() == "N")
+                    {
+                        BotMove(grid);
+                    }
+                }
+            }
+        }
     }
 }
